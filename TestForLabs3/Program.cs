@@ -25,7 +25,7 @@ namespace TestForLabs3
                 {
                     case 0:
                         Console.WriteLine("завершение программы");
-                        //utils.CloseMenu(); тоже пока нет его
+                        MenuClass.CloseMenu(manager);
                         running = false;
                         break;
                     case 1:
@@ -35,8 +35,7 @@ namespace TestForLabs3
                         manager.ShowCars();
                         int carIndex = ReadClass.ReadValueWithCondition<int>("Выберите автомобиль(0 - возврат в основное меню): ", int.TryParse, value => value >= 0 && value <= manager.Cars.Count, "Некорректный ввод, попробуйте снова: ");
                         if (carIndex == 0) break;
-                        //дописать сюда подменю, попытаться внедрить его в класс с менюшками
-                        //Console.ReadLine();
+                        MenuClass.ShowUnderMenu(manager, carIndex-1);
                         break;
                     case 2:
                         Console.Clear();

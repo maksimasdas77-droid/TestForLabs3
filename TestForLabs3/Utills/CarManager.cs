@@ -81,5 +81,97 @@ namespace TestForLabs3
             Cars[index - 1] = newCar;
         }
 
+        public void AddFault(int index)
+        {
+            Console.WriteLine("Введите описание неисправности: ");
+            string desc = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(desc))
+            {
+                Console.WriteLine("Описание не должно быть пустым.");
+                Console.ReadLine();
+                return;
+            }
+            if (Cars[index].Faults == null)
+                Cars[index].Faults = new List<Fault>();
+            Cars[index].Faults.Add(new Fault { Description = desc, Date = DateTime.Now, UpdateAt = DateTime.Now });
+            Console.WriteLine("Неисправность добавлена.");
+            Console.ReadLine();
+        }
+
+        public void ShowFaults(int index)
+        {
+            var faults = Cars[index].Faults;
+            if (faults == null || faults.Count == 0)
+            {
+                Console.WriteLine("Неисправностей нет.");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("Список неисправностей:");
+            for (int i = 0; i < faults.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}.({faults[i].Date}) {faults[i].Description} | последнее обновление: {faults[i].UpdateAt}");
+
+            }
+            Console.ReadLine();
+        }
+
+            public void RemoveFault(int index)
+        {
+            var faults = Cars[index].Faults;
+            if (faults == null || faults.Count == 0)
+            {
+                Console.WriteLine("Неисправностей нет.");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("Список неисправностей:");
+
+            for(int i = 0; i < faults.Count; i++)
+                Console.WriteLine($"{i + 1}. {faults[i].Description} (дата: {faults[i].Date:dd.MM.yyyy HH:mm})");
+            Console.Write("Введите номер неисправности для удаления: ");
+            int faultIndex = ReadClass.ReadValueWithCondition<int>(int.TryParse, x => x >= 1 && x <= faults.Count, $"Введите число от 1 до {faults.Count}: ");
+            faults.RemoveAt(faultIndex - 1);
+            Console.WriteLine("Неисправность удалена.");
+            Console.ReadLine();
+        }
+        public void UpdateFault(int carIndex)
+        {
+            Car car = Cars[carIndex];
+            if (car.Faults == null || car.Faults.Count == 0)
+            {
+                Console.WriteLine("У автомобиля нет неисправностей.");
+                Console.ReadLine();
+                return;
+            }
+            Console.WriteLine("Список неисправностей:");
+            for (int i = 0; i < car.Faults.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {car.Faults[i].Description} ({car.Faults[i].Date:d})");
+            }
+            int faultIndex = ReadClass.ReadValueWithCondition<int>(
+             "Введите номер неисправности для изменения (0 - назад): ",
+             int.TryParse,
+            x => x >= 0 && x <= car.Faults.Count,
+            "Некорректный ввод, попробуйте снова: "
+            );
+            if (faultIndex == 0)
+                return;
+            faultIndex--;
+            Fault oldFault = car.Faults[faultIndex];
+            Fault newFault = new Fault();
+            Console.Write($"Новое описание ({oldFault.Description}): ");
+            string desc = Console.ReadLine();
+            newFault.Description = string.IsNullOrWhiteSpace(desc) ? oldFault.Description : desc;
+
+            newFault.Date = oldFault.Date; //дата остается прежней
+
+            newFault.UpdateAt = DateTime.Now; //дата обновления обновляется
+
+            car.Faults[faultIndex] = newFault;
+
+            Console.WriteLine("Неисправность успешно обновлена.");
+            Console.ReadLine();
+        }
     }
 }
