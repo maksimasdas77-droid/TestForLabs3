@@ -33,7 +33,10 @@ namespace TestForLabs3
                         Console.WriteLine("======Список автомобилей======");
                         //manager.ShowAllCars();
                         manager.ShowCars();
-                        Console.ReadLine();
+                        int carIndex = ReadClass.ReadValueWithCondition<int>("Выберите автомобиль(0 - возврат в основное меню): ", int.TryParse, value => value >= 0 && value <= manager.Cars.Count, "Некорректный ввод, попробуйте снова: ");
+                        if (carIndex == 0) break;
+                        //дописать сюда подменю, попытаться внедрить его в класс с менюшками
+                        //Console.ReadLine();
                         break;
                     case 2:
                         Console.Clear();
