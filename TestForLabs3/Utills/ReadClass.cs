@@ -31,7 +31,7 @@ namespace TestForLabs3
             return value;
         }
 
-        //методы для зацикливания ввода при выходе за необходимый диапазон (два варианта, по аналогии с ReadValue
+        //методы для зацикливания ввода при выходе за необходимый диапазон (два варианта, по аналогии с ReadValue)
         public static T ReadValueWithCondition<T>(string message, UniTryParse<T> parser, Func<T, bool> condition, string errorMessage = "Некорректный ввод. Попробуйте снова: ")
         {
             Console.Write(message);

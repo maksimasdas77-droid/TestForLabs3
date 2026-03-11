@@ -8,7 +8,7 @@ namespace TestForLabs3
 {
     internal class MyUtills
     {
-        public static bool CheckCars(List<Car> Cars) //вызывать потом Utill.CheckCars(Cars);
+        public static bool CheckCars(List<Car> Cars) //вызывать потом MyUtills.CheckCars(Cars);
         {
             if (!Cars.Any())
             {
