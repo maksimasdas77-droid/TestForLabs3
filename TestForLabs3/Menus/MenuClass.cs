@@ -17,8 +17,8 @@ namespace TestForLabs3
             Console.WriteLine("2. Добавить автомобиль");
             Console.WriteLine("3. Удалить автомобиль");
             Console.WriteLine("4. Изменить автомобиль");
-            Console.WriteLine("5. Сохранение в файл");
-            Console.WriteLine("6. Загрузить из файла");
+            Console.WriteLine("5. В разработке...");
+            Console.WriteLine("6. в разработке...");
             Console.WriteLine("0. Выход");
             Console.Write("Выберите пункт: ");
         }

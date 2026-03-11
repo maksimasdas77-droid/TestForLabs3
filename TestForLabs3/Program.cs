@@ -31,7 +31,6 @@ namespace TestForLabs3
                     case 1:
                         Console.Clear();
                         Console.WriteLine("======Список автомобилей======");
-                        //manager.ShowAllCars();
                         manager.ShowCars();
                         int carIndex = ReadClass.ReadValueWithCondition<int>("Выберите автомобиль(0 - возврат в основное меню): ", int.TryParse, value => value >= 0 && value <= manager.Cars.Count, "Некорректный ввод, попробуйте снова: ");
                         if (carIndex == 0) break;
